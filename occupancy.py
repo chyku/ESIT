@@ -6,7 +6,7 @@ from signal import pause
 import os
 from Naked.toolshed.shell import execute_js, muterun_js
 
-IO.setwarnings(False)          #do not show any warnings
+IO.setwarnings(False)       #do not show any warnings
 IO.setmode (IO.BCM)         #we are programming the GPIO by BCM pin numbers. (PIN39 as 'GPIO19')
 IO.setup(19,IO.OUT)         # initialize GPIO19 as an output.
 IO.setup(26,IO.IN)               #initialize GPIO26 as input
@@ -17,11 +17,10 @@ camera = PiCamera()
 origin = '/home/pi/Desktop/project/pictures/origin.jpg'
 
 def take_picture(pic):
-    IO.output(19,True)  
-    camera.start_preview()
-    time.sleep(3)
+    #camera.start_preview()
+    #time.sleep(3)
     camera.capture(pic)
-    camera.stop_preview()
+    #camera.stop_preview()
 
 while 1:
     diff = 0

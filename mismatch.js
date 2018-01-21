@@ -9,9 +9,11 @@ var pic1 = fs.readFileSync('./pictures/1.jpg');
 var pic2 = fs.readFileSync('./pictures/2.jpg');
 var pictures = [pic0, pic1, pic2];
 var bounds = [{left: 60, top: 250, right: 450, bottom: 720}, {left: 650, top: 250, right: 1030, bottom: 720}, {left: 350, top: 0, right: 560, bottom: 250}, {left: 630, top: 0, right: 830, bottom: 250}];
-var areas = [5.03, 4.95, 17.55, 18.43];
+var areas = [5.03, 4.95, 17.55, 18.43]; // to convert percentages to comparable numbers
 
 for (var i = 0; i < 4; i++){
+	
+	// changing settings for each bounding box
 	resemble.outputSettings({
 	  boundingBox: bounds[i],
 	  useCrossOrigin: false,
@@ -21,15 +23,20 @@ for (var i = 0; i < 4; i++){
 	
 	for (var j = 0; j < 3; j++) {
 		var mismatch = 0;
+		
+		// can't use data within this for whatever reason so defined as mismatch
 		var diff = origin.compareTo(pictures[j]).onComplete(function(data){
 			mismatch = data.misMatchPercentage;
 		});
 		
-		console.log(mismatch);
+		console.log(mismatch); //testing purposes
 		avg += parseFloat(mismatch);
 	}
 		
+	// converting average of 3 pictures' percentages to comparable percentages	
 	avg = avg/3 * areas[i]; 
+	
+	//idk if they actually need different percentages but separate for now
 	if (areas[i] > 10){
 		if (avg - 30 > 0){ //need better number here
 			occupancy += avg/35;
@@ -41,12 +48,13 @@ for (var i = 0; i < 4; i++){
 	}
 	avg = 0;
 }
+
+// if it's over 100 
 if (occupancy > 10} {
 	occupancy = 10;
 }
 console.log(occupancy*10);
 
-// if above certain percentage difference, add 25% to image or 1/5 to image
 /* var image = data.getImageDataUrl.toString();
     image = image.replace("image/png", "image/octet-stream");
     fs.writeFileSync('./mismatch.png', image);
@@ -60,7 +68,3 @@ console.log(occupancy*10);
     */
     //fs.writeFileSync('./data.json', JSON.stringify(data, null, 4) , 'utf-8');
 
-/* percentage is fraction of total percentage
- * but percentage difference * proportion of total area
- * equal it out to be compared
- */
