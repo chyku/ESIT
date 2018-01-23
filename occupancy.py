@@ -18,7 +18,7 @@ origin = '/home/pi/Desktop/project/pictures/origin.jpg'
 
 def take_picture(pic):
     #camera.start_preview()
-    #time.sleep(3)
+    time.sleep(2)
     camera.capture(pic)
     #camera.stop_preview()
 
@@ -38,8 +38,8 @@ while 1:
         IO.output(19,False)
         
     else:                   #short hold
+        time.sleep(5)
         for i in range(3):
-            sleep(7);
             take_picture('/home/pi/Desktop/project/pictures/'+ str(i) + '.jpg')
         response = muterun_js('mismatch.js')
         if response.exitcode == 0:

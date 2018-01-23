@@ -8,7 +8,7 @@ var pic0 = fs.readFileSync('./pictures/0.jpg');
 var pic1 = fs.readFileSync('./pictures/1.jpg');
 var pic2 = fs.readFileSync('./pictures/2.jpg');
 var pictures = [pic0, pic1, pic2];
-var bounds = [{left: 60, top: 250, right: 450, bottom: 720}, {left: 650, top: 250, right: 1030, bottom: 720}, {left: 350, top: 0, right: 560, bottom: 250}, {left: 630, top: 0, right: 830, bottom: 250}];
+var bounds = [{left: 60, top: 250, right: 500, bottom: 720}, {left: 650, top: 250, right: 1030, bottom: 720}, {left: 350, top: 0, right: 560, bottom: 250}, {left: 630, top: 0, right: 830, bottom: 250}];
 var areas = [5.03, 4.95, 17.55, 18.43]; // to convert percentages to comparable numbers
 
 for (var i = 0; i < 4; i++){
@@ -29,7 +29,7 @@ for (var i = 0; i < 4; i++){
 			mismatch = data.misMatchPercentage;
 		});
 		
-		console.log(mismatch); //testing purposes
+		//console.log(mismatch); //testing purposes
 		avg += parseFloat(mismatch);
 	}
 		
@@ -37,23 +37,22 @@ for (var i = 0; i < 4; i++){
 	avg = avg/3 * areas[i]; 
 	
 	//idk if they actually need different percentages but separate for now
-	if (areas[i] > 10){
-		if (avg - 30 > 0){ //need better number here
-			occupancy += avg/35;
-		}
-	} else {
-		if (avg - 30 > 0){
-			occupancy += avg/40;
+	
+	if (avg - 8 > 0){
+		if (areas[i] > 10){
+			occupancy += avg/20;
+		} else {
+			occupancy += avg/27;
 		}
 	}
 	avg = 0;
 }
 
 // if it's over 100 
-if (occupancy > 10} {
+if (occupancy > 10) {
 	occupancy = 10;
 }
-console.log(occupancy*10);
+console.log("Occupancy :", occupancy*10, "%");
 
 /* var image = data.getImageDataUrl.toString();
     image = image.replace("image/png", "image/octet-stream");
