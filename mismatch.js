@@ -39,10 +39,11 @@ for (var i = 0; i < 4; i++){
 	//idk if they actually need different percentages but separate for now
 	
 	if (avg - 8 > 0){
+		avg -= 3;
 		if (areas[i] > 10){
-			occupancy += avg/20;
+			occupancy += avg/22;
 		} else {
-			occupancy += avg/27;
+			occupancy += avg/40;
 		}
 	}
 	avg = 0;

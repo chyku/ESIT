@@ -12,18 +12,15 @@ IO.setup(19,IO.OUT)         # initialize GPIO19 as an output.
 IO.setup(26,IO.IN)               #initialize GPIO26 as input
 button = Button(26)
 
-camera = PiCamera()
-
 origin = '/home/pi/Desktop/project/pictures/origin.jpg'
 
 def take_picture(pic):
-    camera.start_preview()
+    #camera.start_preview()
     time.sleep(2)
-    camera.capture(pic)
-    camera.stop_preview()
+    os.system("gpicview " + pic)
+    #camera.stop_preview()
 
 while 1:
-    IO.output(19, True)
     diff = 0
     button.wait_for_press()
     start_time = time.time()
@@ -33,13 +30,12 @@ while 1:
         diff = -start_time+now_time
 
     if diff >= 5 :           #long hold
-        camera.capture(origin)
-        os.system("gpicview " + origin)
+        IO.output(19, True)
+        take_picture(origin)
+        IO.output(19,False)
         
     else:                   #short hold
-        time.sleep(5)
-        for i in range(3):
-            take_picture('/home/pi/Desktop/project/pictures/'+ str(i) + '.jpg')
-        response = muterun_js('mismatch.js')
+        response = muterun_js('/home/pi/Desktop/project/mismatch.js')
         if response.exitcode == 0:
             print(response.stdout)
+
