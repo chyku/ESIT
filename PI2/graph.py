@@ -14,12 +14,18 @@ for phase in np.linspace(0, 10*np.pi, 500):
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import numpy as np
 import matplotlib.pyplot
+import time
+from signal import pause
+
+def update_line(graph, new_data):
+    graph.set_xdata(new_data)
+    plt.draw()
 
 objects = ('1', '2', '3')
 y_pos = np.arange(len(objects))
 occupancy = [85,80,60]
  
-plt.barh(y_pos, occupancy, align='center', alpha=.5)
+graph = plt.barh(y_pos, occupancy, align='center', alpha=.5)
 plt.yticks(y_pos, objects)
 plt.xticks(np.arange(0, 100, 25))
 plt.xlim(0, 100)
@@ -28,5 +34,9 @@ plt.ylabel('Car Number')
 plt.title('Train Occupancy')
 
 # (graphname?).set_ydata(numpy.append(hl.get_xdata(), new_data))
+# https://stackoverflow.com/questions/7187504/set-data-and-autoscale-view-matplotlib
 
 plt.show()
+
+time.sleep(3)
+update_line(graph, [50,50,50])
