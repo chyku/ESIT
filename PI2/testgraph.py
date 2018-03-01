@@ -1,3 +1,5 @@
+#https://stackoverflow.com/questions/9489669/updating-a-matplotlib-bar-graph
+
 import matplotlib
 matplotlib.use('TKAgg')
 import matplotlib.pyplot as plt
