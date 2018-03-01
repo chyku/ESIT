@@ -15,14 +15,17 @@ import matplotlib.pyplot as plt; plt.rcdefaults()
 import numpy as np
 import matplotlib.pyplot
 import time
-from signal import pause
 
-def update_line(graph, new_data):
-    graph.set_xdata(new_data)
+def update(graph, new_data):
+    graph.set_height(new_data)
     plt.draw()
 
 objects = ('1', '2', '3')
+
+# y-coordinates of bars
 y_pos = np.arange(len(objects))
+
+# heights of bars
 occupancy = [85,80,60]
  
 graph = plt.barh(y_pos, occupancy, align='center', alpha=.5)
@@ -35,8 +38,10 @@ plt.title('Train Occupancy')
 
 # (graphname?).set_ydata(numpy.append(hl.get_xdata(), new_data))
 # https://stackoverflow.com/questions/7187504/set-data-and-autoscale-view-matplotlib
+# https://stackoverflow.com/questions/16249466/dynamically-updating-a-bar-plot-in-matplotlib
+
 
 plt.show()
 
-time.sleep(3)
-update_line(graph, [50,50,50])
+time.sleep(2)
+update(graph, [50,50,50])
