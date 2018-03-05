@@ -5,10 +5,12 @@ matplotlib.use('TKAgg')
 import matplotlib.pyplot as plt
 import numpy as np
 
-def animated_barplot():
+values = [0, 10, 20, 30, 40, 50]
+
+def animated_barplot(n):
     # http://www.scipy.org/Cookbook/Matplotlib/Animations
-    x = mu + sigma*np.random.randn(N)
-    rects = plt.bar(range(N), x,  align = 'center')
+    x = values
+    rects = plt.barh(range(N), x, align = 'center')
     for i in range(50):
         x = mu + sigma*np.random.randn(N)
         for rect, h in zip(rects, x):
@@ -17,6 +19,5 @@ def animated_barplot():
 
 fig = plt.figure()
 win = fig.canvas.manager.window
-
-
+win.after(100, animated_barplot)
 plt.show()

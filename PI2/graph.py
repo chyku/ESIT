@@ -17,7 +17,9 @@ import matplotlib.pyplot
 import time
 
 def update(graph, new_data):
-    graph.set_height(new_data)
+    for rect, h in zip(rects, x):
+        rect.set_height(h)
+    fig.canvas.draw()
     plt.draw()
 
 objects = ('1', '2', '3')
@@ -28,7 +30,7 @@ y_pos = np.arange(len(objects))
 # heights of bars
 occupancy = [85,80,60]
  
-graph = plt.barh(y_pos, occupancy, align='center', alpha=.5)
+rects = plt.barh(y_pos, occupancy, align='center', alpha=.5)
 plt.yticks(y_pos, objects)
 plt.xticks(np.arange(0, 100, 25))
 plt.xlim(0, 100)
