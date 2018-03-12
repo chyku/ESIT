@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # need to define N
+N = 5
+x = [10, 20, 30, 50, 60]
 rects = plt.bar(range(N), x,  align = 'center')
 
 def update_graph(data):
@@ -19,16 +21,14 @@ def update_graph(data):
 
 def animated_barplot():
     # http://www.scipy.org/Cookbook/Matplotlib/Animations
-    mu, sigma = 100, 15
-    N = 4
 
     # returns random array of 4 values?
-    x = mu + sigma*np.random.randn(N)
+    x = [60, 50, 30, 20, 10]
 
     # range returns [0 1 2 ... N]
     rects = plt.bar(range(N), x,  align = 'center')
     
-    # why range of 50? i isn't even used in this loop
+    # do this 50x
     for i in range(50):
         x = mu + sigma*np.random.randn(N)
         for rect, h in zip(rects, x):
