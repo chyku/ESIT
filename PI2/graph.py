@@ -1,49 +1,30 @@
 # update the data of the plot objects
 
-"""x = np.linspace(0, 6*np.pi, 100)
-y = np.sin(x)
-fig = plt.figure()
-ax = fig.add_subplot(111)
-line1, = ax.plot(x, y, 'r-') # Returns a tuple of line objects, thus the comma
-for phase in np.linspace(0, 10*np.pi, 500):
-    line1.set_ydata(np.sin(x + phase))
-    fig.canvas.draw()
-    set_ydata
-"""
+import matplotlib.pyplot as plt
+from matplotlib import animation
 
-import matplotlib.pyplot as plt; plt.rcdefaults()
-import numpy as np
-import matplotlib.pyplot
-import time
+fig=plt.figure()
 
-def update(graph, new_data):
-    for rect, h in zip(rects, x):
-        rect.set_height(h)
-    fig.canvas.draw()
-    plt.draw()
+n=100 #Number of frames
+array = [10,20,30]
+x = range(1,4)
+barcollection = plt.barh(x, array)
 
-objects = ('1', '2', '3')
-
-# y-coordinates of bars
-y_pos = np.arange(len(objects))
-
-# heights of bars
-occupancy = [85,80,60]
- 
-rects = plt.barh(y_pos, occupancy, align='center', alpha=.5)
-plt.yticks(y_pos, objects)
-plt.xticks(np.arange(0, 100, 25))
+# just graph setup
 plt.xlim(0, 100)
 plt.xlabel('Occupancy')
 plt.ylabel('Car Number')
 plt.title('Train Occupancy')
+plt.yticks([1, 2, 3])
 
-# (graphname?).set_ydata(numpy.append(hl.get_xdata(), new_data))
-# https://stackoverflow.com/questions/7187504/set-data-and-autoscale-view-matplotlib
-# https://stackoverflow.com/questions/16249466/dynamically-updating-a-bar-plot-in-matplotlib
+def animate(i):
+    y = [m + m for m in array]
+    for i in range(3):
+        array[i] += 1
+    for i, b in enumerate(barcollection):
+        b.set_width(y[i])
 
+# https://matplotlib.org/api/_as_gen/matplotlib.animation.FuncAnimation.html#matplotlib.animation.FuncAnimation
+anim=animation.FuncAnimation(fig,animate,repeat=False,blit=False,frames=n)
 
 plt.show()
-
-time.sleep(2)
-update(graph, [50,50,50])
