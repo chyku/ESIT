@@ -1,8 +1,11 @@
 #SERVER SIDE (PYTHON)
 # for pi2 = connected to monitor
+# add sorting of train cars? sounds kind of difficult but would be nice
 
 import socket
 import time
+import matplotlib.pyplot as plt
+from matplotlib import animation
 
 import os
 
@@ -47,6 +50,35 @@ while(True):
             CONNECTION.send(msg.encode("utf-8"))
             #GPIO.output(7, GPIO.HIGH)
             #GPIO.output(11, GPIO.LOW)
+
+            # graph code starts 
+            fig=plt.figure()
+
+            n=100 #Number of frames
+            occupancy = [50,20,10]
+            x = range(1,4)
+            barcollection = plt.barh(x, occupancy)
+
+            # just graph setup
+            plt.xlim(0, 100)
+            plt.xlabel('Occupancy')
+            plt.ylabel('Car Number')
+            plt.title('Train Occupancy')
+            plt.yticks([1, 2, 3])
+
+            def animate(i):
+                y = [m + m for m in occupancy]
+                for i in range(3):
+                    occupancy[i] += 1
+                for i, b in enumerate(barcollection):
+                    b.set_width(y[i])
+
+            # https://matplotlib.org/api/_as_gen/matplotlib.animation.FuncAnimation.html#matplotlib.animation.FuncAnimation
+            anim=animation.FuncAnimation(fig,animate,repeat=True,blit=False,frames=n)
+
+            plt.show()
+            # graph code ends
+
         else:
             CONNECTION.close()
             break;

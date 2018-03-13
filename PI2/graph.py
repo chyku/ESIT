@@ -6,7 +6,7 @@ from matplotlib import animation
 fig=plt.figure()
 
 n=100 #Number of frames
-array = [10,20,30]
+array = [50,20,10]
 x = range(1,4)
 barcollection = plt.barh(x, array)
 
