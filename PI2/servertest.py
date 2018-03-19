@@ -28,7 +28,21 @@ s.bind(server_address)
 s.listen(1)
 print('listening for a connection...')
 
-while(True): # basically should be all of the animate function
+# graph code starts 
+fig=plt.figure()
+
+occupancy = [50,20,10]
+x = range(1,4)
+barcollection = plt.barh(x, occupancy)
+
+# just graph setup
+plt.xlim(0, 100)
+plt.xlabel('Occupancy')
+plt.ylabel('Car Number')
+plt.title('Train Occupancy')
+plt.yticks([1, 2, 3])
+
+def animate(i): # basically should be all of the animate function
     try:
         #if a connection` is found, accept it and create (object, string)
         (CONNECTION, ADDRESS) = s.accept()
@@ -44,37 +58,17 @@ while(True): # basically should be all of the animate function
         # data to int
         data = int(data)
         if data <= 100:
-
             CONNECTION.send(msg.encode("utf-8"))
             #GPIO.output(7, GPIO.HIGH)
             #GPIO.output(11, GPIO.LOW)
-
-            # graph code starts 
-            fig=plt.figure()
-
-            occupancy = [50,20,10]
-            x = range(1,4)
-            barcollection = plt.barh(x, occupancy)
-
-            # just graph setup
-            plt.xlim(0, 100)
-            plt.xlabel('Occupancy')
-            plt.ylabel('Car Number')
-            plt.title('Train Occupancy')
-            plt.yticks([1, 2, 3])
-
-            def animate(i):
-                percent = int(input('0 - 100: '))
-                y = [50, 20, percent]
-                for i, b in enumerate(barcollection):
-                    b.set_width(y[i])
-
-            anim=animation.FuncAnimation(fig,animate,repeat=True,blit=False,frames=n)
-
-            plt.show()
+            percent = data
+            y = [50, 20, percent]
+            for i, b in enumerate(barcollection):
+                b.set_width(y[i])
             # graph code ends
 
         else:
+            # how do you do this if you don't want the connection to close
             CONNECTION.close()
             break;
 
@@ -83,3 +77,6 @@ while(True): # basically should be all of the animate function
     except KeyboardInterrupt:
        s.close()
        CONNECTION.close()
+
+anim=animation.FuncAnimation(fig,animate,repeat=True,blit=False,frames=n)
+plt.show()
