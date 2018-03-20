@@ -53,7 +53,7 @@ for (var i = 0; i < 4; i++){
 if (occupancy > 10) {
 	occupancy = 10;
 }
-console.log("Occupancy :", occupancy*10, "%");
+console.log(occupancy*10);
 
 /* var image = data.getImageDataUrl.toString();
     image = image.replace("image/png", "image/octet-stream");

@@ -26,11 +26,11 @@ try:
     sock.send(msg.encode())
     print ('Sending occupancy')
 
-    # Look for the response
+    """ Look for the response (confirmation)
     answer = sock.recv(1024).decode()
     #print(answer)       
     if answer == 'received':
-    	print ("Received")
+    	print ("Received") """
 
 finally:
     sock.close()
