@@ -58,10 +58,11 @@ def animate(i): # basically should be all of the animate function
         # checking data value
         # should send received if data = number?
         # data to int
+        msg = data
         data = int(data)
         
         if data <= 100:
-            CONNECTION.send(msg.encode("utf-8"))
+            #CONNECTION.send(msg.encode("utf-8"))
             #GPIO.output(7, GPIO.HIGH)
             #GPIO.output(11, GPIO.LOW)
             y = [50, 20, data]
@@ -72,7 +73,6 @@ def animate(i): # basically should be all of the animate function
         else:
             # how do you do this if you don't want the connection to close
             CONNECTION.close()
-            break;
 
         CONNECTION.close()
 
@@ -80,5 +80,5 @@ def animate(i): # basically should be all of the animate function
        s.close()
        CONNECTION.close()
 
-anim=animation.FuncAnimation(fig,animate,repeat=True,blit=False,frames=n)
+anim=animation.FuncAnimation(fig,animate,repeat=True,blit=False,frames=500)
 plt.show()
