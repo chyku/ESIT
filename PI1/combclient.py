@@ -16,14 +16,13 @@ button = Button(26)
 # Define host based on hostname -I
 # can't find IP address of other thing;
 # find before demo, git push and git pull real quick
-# run server on pi1
+# run server on pi2
 
 HOST = "192.168.43.7"     # Symbolic name meaning all available interfaces
 PORT = 5007               # Arbitrary non-privileged port
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_address = (HOST, PORT)
-sock.connect(server_address)
 
 camera = PiCamera()
 
@@ -51,11 +50,17 @@ while 1:
         
     else:                   #short hold
         time.sleep(5)
+
         for i in range(3):
             take_picture('/home/pi/Desktop/project/pictures/'+ str(i) + '.jpg')
         response = muterun_js('mismatch.js')
+
         if response.exitcode == 0:
-            print(response.stdout)
-            msg = int(response.stdout)
-            sock.send(msg.encode())
-            
+            try:
+                sock.connect(server_address)
+                data = response.stdout
+                sock.send(data.encode())
+                print('Sending occupancy')
+                # turn on LED?
+            finally:
+                sock.close()
