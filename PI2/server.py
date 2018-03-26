@@ -42,10 +42,10 @@ plt.ylabel('Car Number')
 plt.title('Train Occupancy')
 plt.yticks([1, 2, 3])
 
-#if a connection` is found, accept it and create (object, string)
+#if a connection is found, accept it and create (object, string)
 
 
-def animate(i): # basically should be all of the animate function
+def animate(i):
     try:
         (CONNECTION, ADDRESS) = s.accept()
         print(ADDRESS)
@@ -63,8 +63,6 @@ def animate(i): # basically should be all of the animate function
         
         if data <= 100:
             #CONNECTION.send(msg.encode("utf-8"))
-            #GPIO.output(7, GPIO.HIGH)
-            #GPIO.output(11, GPIO.LOW)
             y = [50, 20, data]
             for i, b in enumerate(barcollection):
                 b.set_width(y[i])

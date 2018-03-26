@@ -53,6 +53,7 @@ while 1:
 
         for i in range(3):
             take_picture('/home/pi/Desktop/project/pictures/'+ str(i) + '.jpg')
+
         response = muterun_js('mismatch.js')
 
         if response.exitcode == 0:

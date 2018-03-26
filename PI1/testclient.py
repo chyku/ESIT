@@ -44,15 +44,20 @@ while 1:
 
     if diff >= 5 :           #long hold
         camera.capture(origin)
+
+        # where to light up LED
+        IO.output(19, True)
+        time.sleep(1)
+        IO.output(19,False)
         
     else:                   #short hold
         time.sleep(5)
 
         for i in range(3):
             take_picture('/home/pi/Desktop/project/pictures/'+ str(i) + '.jpg')
-        response = muterun_js('mismatch.js')
+        #response = muterun_js('mismatch.js')
 
-        if response.exitcode == 0:
+        #if response.exitcode == 0:
             try:
                 sock.connect(server_address)
                 data = response.stdout
