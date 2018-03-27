@@ -5,7 +5,7 @@ import os
 from Naked.toolshed.shell import execute_js, muterun_js
 
 
-# Define host based on hostname -I
+# Define host based on hostname -I (PI2 IP address)
 # can't find IP address of other thing;
 # find before demo, git push and git pull real quick
 # run server on pi2
@@ -24,7 +24,7 @@ def take_picture(pic):
     os.system("gpicview " + pic)
 
 while 1:
-        send = input("press enter to send")
+        send = input("press enter to start")
 
         for i in range(3):
             take_picture('/home/pi/Desktop/project/pictures/'+ str(i) + '.jpg')
