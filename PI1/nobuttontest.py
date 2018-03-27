@@ -13,27 +13,31 @@ from Naked.toolshed.shell import execute_js, muterun_js
 HOST = "192.168.43.158"     # Symbolic name meaning all available interfaces
 PORT = 5007               # Arbitrary non-privileged port
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_address = (HOST, PORT)
+
 
 # might want to change origin address
-origin = '/home/pi/Desktop/project/pictures/origin.jpg'
+origin = '/home/pi/Desktop/pictures/origin.jpg'
 
 def take_picture(pic):
     time.sleep(2)
     os.system("gpicview " + pic)
 
 while 1:
-        send = input("press enter to start")
+        m = input("press enter to start")
 
-        for i in range(3):
-            take_picture('/home/pi/Desktop/project/pictures/'+ str(i) + '.jpg')
-        response = muterun_js('mismatch.js')
+        """for i in range(3):
+            take_picture('/home/pi/Desktop/pictures/'+ str(i) + '.jpg')
+        """
+        response = muterun_js('/home/pi/Desktop/ESIT/PI1/mismatch.js')
 
         if response.exitcode == 0:
+            print("sending")
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            server_address = (HOST, PORT)
+            sock.connect(server_address)
+
             try:
-                sock.connect(server_address)
-                data = response.stdout
+                data = str(int(float((response.stdout)[0:-1])))
                 sock.send(data.encode())
                 print('Sending occupancy')
                 # turn on LED?

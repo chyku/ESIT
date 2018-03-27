@@ -20,11 +20,6 @@ button = Button(26)
 HOST = "192.168.43.7"     # Symbolic name meaning all available interfaces
 PORT = 5007               # Arbitrary non-privileged port
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_address = (HOST, PORT)
-
-camera = PiCamera()
-
 # might want to change origin address
 origin = '/home/pi/Desktop/project/pictures/origin.jpg'
 
@@ -58,9 +53,12 @@ while 1:
         response = muterun_js('mismatch.js')
 
         if response.exitcode == 0:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            server_address = (HOST, PORT)
+            sock.connect(server_address)
+
             try:
-                sock.connect(server_address)
-                data = response.stdout
+                data = str(int(float((response.stdout)[0:-1])))
                 sock.send(data.encode())
                 print('Sending occupancy')
                 # turn on LED?

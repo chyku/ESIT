@@ -3,10 +3,10 @@ const fs = require('fs');
 
 var avg = 0.0;
 var occupancy = 0;
-var origin = resemble(fs.readFileSync('./pictures/origin.jpg'));
-var pic0 = fs.readFileSync('./pictures/0.jpg');
-var pic1 = fs.readFileSync('./pictures/1.jpg');
-var pic2 = fs.readFileSync('./pictures/2.jpg');
+var origin = resemble(fs.readFileSync('/home/pi/Desktop/pictures/origin.jpg'));
+var pic0 = fs.readFileSync('/home/pi/Desktop/pictures/0.jpg');
+var pic1 = fs.readFileSync('/home/pi/Desktop/pictures/1.jpg');
+var pic2 = fs.readFileSync('/home/pi/Desktop/pictures/2.jpg');
 var pictures = [pic0, pic1, pic2];
 var bounds = [{left: 60, top: 250, right: 500, bottom: 720}, {left: 650, top: 250, right: 1030, bottom: 720}, {left: 350, top: 0, right: 560, bottom: 250}, {left: 630, top: 0, right: 830, bottom: 250}];
 var areas = [5.03, 4.95, 17.55, 18.43]; // to convert percentages to comparable numbers

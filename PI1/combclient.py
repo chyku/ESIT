@@ -13,16 +13,13 @@ IO.setup(19,IO.OUT)         # initialize GPIO19 as an output.
 IO.setup(26,IO.IN)               #initialize GPIO26 as input
 button = Button(26)
 
-# Define host based on hostname -I
+# Define host based on hostname -I (PI2 IP address)
 # can't find IP address of other thing;
 # find before demo, git push and git pull real quick
 # run server on pi2
 
 HOST = "192.168.43.7"     # Symbolic name meaning all available interfaces
 PORT = 5007               # Arbitrary non-privileged port
-
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_address = (HOST, PORT)
 
 camera = PiCamera()
 
@@ -57,9 +54,12 @@ while 1:
         response = muterun_js('mismatch.js')
 
         if response.exitcode == 0:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            server_address = (HOST, PORT)
+            sock.connect(server_address)
+            
             try:
-                sock.connect(server_address)
-                data = response.stdout
+                data = str(int(float((response.stdout)[0:-1])))
                 sock.send(data.encode())
                 print('Sending occupancy')
                 # turn on LED?
