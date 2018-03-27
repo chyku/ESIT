@@ -10,7 +10,7 @@ from Naked.toolshed.shell import execute_js, muterun_js
 # find before demo, git push and git pull real quick
 # run server on pi2
 
-HOST = "192.168.43.7"     # Symbolic name meaning all available interfaces
+HOST = "192.168.43.158"     # Symbolic name meaning all available interfaces
 PORT = 5007               # Arbitrary non-privileged port
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
