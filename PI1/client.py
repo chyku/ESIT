@@ -18,7 +18,7 @@ button = Button(26)
 # find before demo, git push and git pull real quick
 # run server on pi2
 
-HOST = "192.168.43.7"     # Symbolic name meaning all available interfaces
+HOST = "192.168.43.158"     # Symbolic name meaning all available interfaces
 PORT = 5007               # Arbitrary non-privileged port
 
 camera = PiCamera()

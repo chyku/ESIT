@@ -2,6 +2,7 @@
 
 import matplotlib.pyplot as plt
 from matplotlib import animation
+import numpy as np
 
 fig=plt.figure()
 
@@ -17,6 +18,7 @@ plt.xlabel('Occupancy')
 plt.ylabel('Car Number')
 plt.title('Train Occupancy')
 plt.yticks([1, 2, 3])
+plt.xticks(np.arange(0, 101, 25))
 
 def animate(i):
     # y = [m + m for m in array]
