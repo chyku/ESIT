@@ -22,24 +22,21 @@ def take_picture(pic):
     time.sleep(2)
     os.system("gpicview " + pic)
 
-while 1:
-        m = input("press enter to start")
+"""for i in range(3):
+        take_picture('/home/pi/Desktop/pictures/'+ str(i) + '.jpg')"""
 
-        """for i in range(3):
-            take_picture('/home/pi/Desktop/pictures/'+ str(i) + '.jpg')
-        """
-        response = muterun_js('/home/pi/Desktop/ESIT/PI1/mismatch.js')
+response = muterun_js('/home/pi/Desktop/ESIT/PI1/mismatch.js')
 
-        if response.exitcode == 0:
-            print("sending")
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            server_address = (HOST, PORT)
-            sock.connect(server_address)
+if response.exitcode == 0:
+    print("sending")
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_address = (HOST, PORT)
+    sock.connect(server_address)
 
-            try:
-                data = str(int(float((response.stdout)[0:-1])))
-                sock.send(data.encode())
-                print('Sending occupancy')
-                # turn on LED?
-            finally:
-                sock.close()
+    try:
+        data = str(int(float((response.stdout)[0:-1])))
+        sock.send(data.encode())
+        print('Sending occupancy')
+            # turn on LED?
+    finally:
+        sock.close()

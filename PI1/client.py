@@ -10,8 +10,8 @@ from Naked.toolshed.shell import execute_js, muterun_js
 IO.setwarnings(False)       # do not show any warnings
 IO.setmode (IO.BCM)         # we are programming the GPIO by BCM pin numbers. (PIN39 as 'GPIO19')
 IO.setup(19,IO.OUT)         # initialize GPIO19 as an output.
-IO.setup(26,IO.IN)          # initialize GPIO26 as input
-button = Button(26)
+IO.setup(21,IO.IN)          # initialize GPIO26 as input
+button = Button(21)
 
 # Define host based on hostname -I (PI2 IP address)
 # can't find IP address of other thing;
@@ -22,6 +22,7 @@ HOST = "192.168.43.158"     # Symbolic name meaning all available interfaces
 PORT = 5007               # Arbitrary non-privileged port
 
 camera = PiCamera()
+camera.resolution = (1280,720)
 
 # might want to change origin address
 origin = '/home/pi/Desktop/pictures/origin.jpg'

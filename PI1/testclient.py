@@ -17,18 +17,20 @@ button = Button(26)
 # find before demo, git push and git pull real quick
 # run server on pi2
 
-HOST = "192.168.43.7"     # Symbolic name meaning all available interfaces
+HOST = "192.168.43.158"     # Symbolic name meaning all available interfaces
 PORT = 5007               # Arbitrary non-privileged port
 
 # might want to change origin address
 origin = '/home/pi/Desktop/project/pictures/origin.jpg'
+
+IO.output(19,False)
+
 
 def take_picture(pic):
     time.sleep(2)
     os.system("gpicview " + pic)
 
 while 1:
-    IO.output(19, True)
     diff = 0
     button.wait_for_press()
     start_time = time.time()
@@ -46,7 +48,8 @@ while 1:
         IO.output(19,False)
         
     else:                   #short hold
-        time.sleep(5)
+        IO.output(19, True)
+        time.sleep(1)
 
         for i in range(3):
             take_picture('/home/pi/Desktop/project/pictures/'+ str(i) + '.jpg')
@@ -64,3 +67,5 @@ while 1:
                 # turn on LED?
             finally:
                 sock.close()
+        
+        IO.output(19,False)
