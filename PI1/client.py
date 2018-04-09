@@ -1,10 +1,9 @@
+import time
 from gpiozero import Button
 from picamera import PiCamera
 import RPi.GPIO as IO
-import time
 import socket
 from signal import pause
-import os
 from Naked.toolshed.shell import execute_js, muterun_js
 
 IO.setwarnings(False)       # do not show any warnings
@@ -23,6 +22,7 @@ PORT = 5007               # Arbitrary non-privileged port
 
 camera = PiCamera()
 camera.resolution = (1280,720)
+IO.output(19,False)
 
 # might want to change origin address
 origin = '/home/pi/Desktop/pictures/origin.jpg'
@@ -63,11 +63,6 @@ while 1:
             try:
                 data = str(int(float((response.stdout)[0:-1])))
                 sock.send(data.encode())
-                """ Look for the response (confirmation)
-                answer = sock.recv(1024).decode()
-                #print(answer)       
-                if answer == 'received':
-                print ("Received") """
             finally:
                 sock.close()
-        IO.output(19, False)
+                IO.output(19, False)
