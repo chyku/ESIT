@@ -6,6 +6,7 @@ BEFORE RUNNING:
    https://console.developers.google.com/apis/api/sheets
 2. Install the Python client library for Google APIs by running
    `pip install --upgrade google-api-python-client`
+   https://developers.google.com/sheets/api/guides/values
 """
 from __future__ import print_function
 from apiclient.discovery import build
@@ -37,18 +38,25 @@ service = discovery.build('sheets', 'v4', credentials=credentials)
 # The ID of the spreadsheet to update.
 spreadsheet_id = '1Cyxfg7UIq2_1-mnb55ibDHYYxznCUos1RNqyq_ff2Y0'
 # The A1 notation of the values to update.
-range_ = 'Sheet1!A1:D4'  # TODO: Update placeholder value.
+range_ = 'Sheet1!A1:B2'  # TODO: Update placeholder value.
 
 # How the input data should be interpreted.
 value_input_option = 'USER_ENTERED'  # TODO: Update placeholder value.
 
 value_range_body = {
-    # TODO: Add desired entries to the request body. All existing entries
-    # will be replaced.
-    {"Item", "Cost", "Stocked", "Ship Date"},
-    {"Wheel", "$20.50", "4", "3/1/2016"},
-    {"Door", "$15", "2", "3/15/2016"},
-    {"Engine", "$100", "1", "30/20/2016"}
+    "range": range_, # The range the values cover, in A1 notation.
+      # For output, this range indicates the entire requested range,
+      # even though the values will exclude trailing rows and columns.
+      # When appending values, this field represents the range to search for a
+      # table, after which values will be appended.
+  "values": [
+      # For input, with `range=A1:B2,majorDimension=ROWS` then `[[1,2],[3,4]]`
+      # will set `A1=1,B1=2,A2=3,B2=4`. With `range=A1:B2,majorDimension=COLUMNS`
+      # then `[[1,2],[3,4]]` will set `A1=1,B1=3,A2=2,B2=4`.
+      # To set a cell to an empty value, set the string value to an empty string.
+      [1,2],[3,4]
+    ],
+    "majorDimension": "COLUMNS"
 }
 
 request = service.spreadsheets().values().update(spreadsheetId=spreadsheet_id, range=range_, valueInputOption=value_input_option, body=value_range_body)

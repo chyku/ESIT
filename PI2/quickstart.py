@@ -7,7 +7,7 @@ from httplib2 import Http
 from oauth2client import file, client, tools
 
 # Setup the Sheets API
-SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
+SCOPES = 'https://www.googleapis.com/auth/spreadsheets'
 store = file.Storage('credentials.json')
 creds = store.get()
 if not creds or creds.invalid:
