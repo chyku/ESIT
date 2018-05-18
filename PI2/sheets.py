@@ -7,6 +7,7 @@ BEFORE RUNNING:
 2. Install the Python client library for Google APIs by running
    `pip install --upgrade google-api-python-client`
    https://developers.google.com/sheets/api/guides/values
+   https://stackoverflow.com/questions/38949318/google-sheets-api-returns-the-caller-does-not-have-permission-when-using-serve
 """
 from __future__ import print_function
 from apiclient.discovery import build
