@@ -1,3 +1,5 @@
+# TESTS SYSTEM WITHOUT A BUTTON
+
 import time
 import socket
 from signal import pause
